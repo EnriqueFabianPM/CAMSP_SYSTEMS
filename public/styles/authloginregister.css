@@ -1,0 +1,48 @@
+/* Estilos para Login y Registro del CAM San Pedro */
+body {
+    background: #f5fdf8;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-container h2 {
+    color: #2E8B57;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.auth-btn {
+    width: 100%;
+    background: #FFD700;
+    color: #1C352D;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-btn:hover {
+    background: #e5c100;
+}

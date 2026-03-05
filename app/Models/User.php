@@ -18,9 +18,24 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'fotoqr',
+        'foto',
+        'identificador',
+        'nombre',
+        'apellidos',
+        'rol', // admin, docente, estudiante, visitante, padre
         'email',
         'password',
+        'telefono',
+        'direccion',
+        'curp',
+        'fecha_nacimiento',
+        'condicion',
+        'taller_asignado',
+        'responsable_id',
+        'observaciones',
+        'estatus',
+        'ultimo_acceso',
     ];
 
     /**
@@ -44,5 +59,37 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relaciones
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'responsable_id');
+    }
+
+    public function estudiantes()
+    {
+        return $this->hasMany(User::class, 'responsable_id');
+    }
+
+    // Scopes (para filtrar por tipo)
+    public function scopeDocentes($query)
+    {
+        return $query->where('rol', 'docente');
+    }
+
+    public function scopeEstudiantes($query)
+    {
+        return $query->where('rol', 'estudiante');
+    }
+
+    public function scopeVisitantes($query)
+    {
+        return $query->where('rol', 'visitante');
+    }
+
+    public function scopePadres($query)
+    {
+        return $query->where('rol', 'padre');
     }
 }

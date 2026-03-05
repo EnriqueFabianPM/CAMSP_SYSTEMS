@@ -1,0 +1,317 @@
+/* =========================================================
+   🎓 CAM SAN PEDRO — ESTILOS PRINCIPALES
+========================================================= */
+
+:root {
+
+    --verde: #2f855a;
+    --verde-oscuro: #276749;
+    --amarillo: #ffd600;
+
+    --gris-claro: #f7faf8;
+    --gris-oscuro: #374151;
+
+    --blanco: #ffffff;
+
+    --sombra: 0 6px 16px rgba(0, 0, 0, 0.1);
+
+}
+
+/* BASE */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.publico {
+    background: var(--gris-claro);
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+}
+
+/* NAVBAR */
+
+.navbar {
+    background: var(--blanco);
+    border-bottom: 4px solid var(--verde);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.logo-sm {
+    height: 40px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--gris-oscuro);
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: 0.25s;
+}
+
+.nav-item:hover {
+    background: var(--verde);
+    color: white;
+}
+
+.nav-item.registro {
+    background: var(--amarillo);
+    font-weight: 600;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    background: url('/images/hero-cam.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 170px 20px 120px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 850px;
+    margin: auto;
+}
+
+.hero-title {
+    font-size: 2.9rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 6px;
+    transition: 0.25s;
+}
+
+.hero-btn--primary {
+    background: var(--amarillo);
+    color: #1a202c;
+}
+
+.hero-btn--primary:hover {
+    background: #f4c400;
+}
+
+.hero-btn--outline {
+    border: 2px solid white;
+    color: white;
+}
+
+.hero-btn--outline:hover {
+    background: white;
+    color: #222;
+}
+
+/* SECCIONES */
+
+.section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--verde-oscuro);
+    margin-bottom: 25px;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.bg-soft {
+    background: #f9fafb;
+}
+
+/* TARJETAS */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: var(--sombra);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+/* STEPS */
+
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.step {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+
+.step-number {
+    background: var(--verde);
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* ABOUT */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.about-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+/* CONTACTO */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.contact-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+}
+
+/* FOOTER */
+
+.footer {
+    background: var(--verde-oscuro);
+    color: white;
+    padding: 40px 20px;
+    margin-top: 60px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.footer a {
+    color: var(--amarillo);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.copy {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:768px) {
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
