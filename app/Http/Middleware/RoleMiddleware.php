@@ -2,29 +2,29 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
+use Closure;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed ...$roles
+     * Verifica que el usuario autenticado tenga al menos uno de los roles requeridos.
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        $user = $request->user();
-
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión primero.');
+        if (!Auth::check()) {
+            return redirect('/login');
         }
 
-        if (!in_array($user->rol, $roles)) {
-            return redirect()->route('dashboard')->with('error', 'No tienes permiso para acceder a esta sección.');
+        $user = Auth::user();
+        $rolesPermitidos = explode('|', $role);
+
+        // CAMBIO: Usamos 'rol' (en español) como está en tu base de datos y reporte
+        if (!in_array($user->rol, $rolesPermitidos)) {
+            // Si no tiene permiso, lo mandamos al dashboard con un error
+            return redirect('/dashboard')->with('error', 'Acceso no autorizado a esta sección.');
         }
 
         return $next($request);

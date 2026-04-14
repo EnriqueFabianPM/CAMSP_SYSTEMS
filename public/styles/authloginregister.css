@@ -1,48 +1,158 @@
-/* Estilos para Login y Registro del CAM San Pedro */
-body {
-    background: #f5fdf8;
-    font-family: "Poppins", sans-serif;
+/* =========================================================
+   🎓 CAM SAN PEDRO — AUTENTICACIÓN (LOGIN/REGISTER)
+========================================================= */
+
+:root {
+    --verde: #2f855a;
+    --verde-oscuro: #276749;
+    --azul: #2b6cb0;
+    --azul-oscuro: #1e4e8c;
+    --amarillo: #ffd600;
+    --gris-oscuro: #374151;
+    --gris-claro: #f7faf8;
+    --blanco: #ffffff;
+    --sombra: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Fondo con la imagen institucional y gradiente del Hero */
+.auth-page-bg {
+    margin: 0;
+    padding: 20px;
+    min-height: 95vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    background:
+        linear-gradient(120deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.45)),
+        url('/Imagenes/CAM Frente.png') center/cover no-repeat fixed;
+    font-family: 'Poppins', sans-serif;
 }
 
-.auth-container {
-    background: white;
+/* Tarjeta de autenticación con transparencia sutil */
+.auth-card {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
     padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 420px;
+    max-width: 450px;
+    border-top: 6px solid var(--verde);
+    animation: fadeIn 0.5s ease-out;
 }
 
-.auth-container h2 {
-    color: #2E8B57;
-    margin-bottom: 25px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-header {
     text-align: center;
+    margin-bottom: 30px;
 }
 
-.auth-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+.auth-header h2 {
+    color: var(--azul-oscuro);
+    font-size: 1.8rem;
+    margin-top: 15px;
+    font-weight: 700;
 }
 
-.auth-btn {
-    width: 100%;
-    background: #FFD700;
-    color: #1C352D;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
+/* Grupos de entrada */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
     font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+    color: var(--gris-oscuro);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
-.auth-btn:hover {
-    background: #e5c100;
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+/* Botón principal de autenticación (Amarillo como en el Hero) */
+.btn-auth {
+    width: 100%;
+    background: var(--amarillo);
+    color: #222;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background: #f0c900;
+}
+
+.btn-auth:active {
+    transform: translateY(0);
+}
+
+/* Enlaces y textos de ayuda */
+.auth-link {
+    color: var(--azul);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: var(--azul-oscuro);
+    text-decoration: underline;
+}
+
+/* Estilo para mensajes de error */
+.text-danger {
+    color: var(--rojo);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Responsive para la tarjeta de registro */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 25px;
+    }
+
+    .auth-header h2 {
+        font-size: 1.5rem;
+    }
 }

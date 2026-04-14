@@ -1,38 +1,124 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('title', 'Nuevo Usuario')
 
 @section('content')
-    <h1>Registrar Nuevo Usuario</h1>
 
-    <form action="{{ route('usuarios.store') }}" method="POST">
+<div class="max-w-5xl mx-auto form-card">
+
+    {{-- HEADER --}}
+    <div class="form-header">
+        <h2>Registrar Usuario</h2>
+        <p>Completa la información del nuevo integrante</p>
+    </div>
+
+    <form action="{{ route('usuarios.store') }}" method="POST" enctype="multipart/form-data"
+        class="p-8 space-y-6">
+
         @csrf
 
-        <label>Identificador:</label>
-        <input type="text" name="identificador" required><br>
+        {{-- DATOS PERSONALES --}}
+        <div class="form-section">
+            <p class="form-section-title">Datos personales</p>
 
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required><br>
+            <div class="grid md:grid-cols-2 gap-5">
 
-        <label>Apellidos:</label>
-        <input type="text" name="apellidos"><br>
+                <div>
+                    <label class="form-label">Identificador</label>
+                    <input type="text" name="identificador" required class="form-input">
+                </div>
 
-        <label>Email:</label>
-        <input type="email" name="email"><br>
+                <div>
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-input">
+                </div>
 
-        <label>Rol:</label>
-        <select name="rol" required>
-            <option value="">Seleccionar</option>
-            <option value="admin">Admin</option>
-            <option value="docente">Docente</option>
-            <option value="estudiante">Estudiante</option>
-            <option value="padre">Padre</option>
-            <option value="visitante">Visitante</option>
-        </select><br>
+                <div>
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="nombre" required class="form-input">
+                </div>
 
-        <label>Contraseña:</label>
-        <input type="password" name="password"><br>
+                <div>
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" name="apellidos" required class="form-input">
+                </div>
 
-        <button type="submit">Guardar</button>
+                <div>
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" name="telefono" class="form-input">
+                </div>
+
+                <div>
+                    <label class="form-label">CURP</label>
+                    <input type="text" name="curp" class="form-input">
+                </div>
+
+            </div>
+        </div>
+
+        {{-- SISTEMA --}}
+        <div class="form-section">
+            <p class="form-section-title">Sistema</p>
+
+            <div class="grid md:grid-cols-2 gap-5">
+
+                <div>
+                    <label class="form-label">Rol</label>
+                    <select name="rol" class="form-input">
+                        <option value="estudiante">Estudiante</option>
+                        <option value="docente">Docente</option>
+                        <option value="padre">Padre</option>
+                        <option value="visitante">Visitante</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">Estatus</label>
+                    <select name="estatus" class="form-input">
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">Taller</label>
+                    <input type="text" name="taller_asignado" class="form-input">
+                </div>
+
+                <div>
+                    <label class="form-label">Condición</label>
+                    <input type="text" name="condicion" class="form-input">
+                </div>
+
+            </div>
+        </div>
+
+        {{-- FOTO --}}
+        <div class="form-section">
+            <p class="form-section-title">Imagen</p>
+
+            <div class="form-photo">
+                <input type="file" name="foto">
+            </div>
+        </div>
+
+        {{-- OBSERVACIONES --}}
+        <div>
+            <label class="form-label">Observaciones</label>
+            <textarea name="observaciones" rows="3" class="form-input form-textarea"></textarea>
+        </div>
+
+        {{-- BOTONES --}}
+        <div class="form-actions">
+            <button type="reset" class="btn-cancel">
+                Limpiar
+            </button>
+
+            <button type="submit" class="btn-save">
+                Registrar usuario
+            </button>
+        </div>
+
     </form>
+</div>
 
-    <a href="{{ route('usuarios.index') }}">Volver</a>
 @endsection

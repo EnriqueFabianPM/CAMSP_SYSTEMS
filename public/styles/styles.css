@@ -1,71 +1,84 @@
 /* =========================================================
-   🎓 CAM SAN PEDRO — ESTILOS PRINCIPALES
+   🎓 CAM SAN PEDRO — ESTILOS COMPLETOS
 ========================================================= */
 
+/* VARIABLES */
 :root {
-
     --verde: #2f855a;
     --verde-oscuro: #276749;
+
+    --azul: #2b6cb0;
+    --azul-oscuro: #1e4e8c;
+
     --amarillo: #ffd600;
+    --rojo: #c53030;
 
     --gris-claro: #f7faf8;
     --gris-oscuro: #374151;
 
     --blanco: #ffffff;
 
-    --sombra: 0 6px 16px rgba(0, 0, 0, 0.1);
-
+    --sombra: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* BASE */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body.publico {
+    font-family: 'Poppins', sans-serif;
     background: var(--gris-claro);
     color: var(--gris-oscuro);
     line-height: 1.6;
 }
 
-/* NAVBAR */
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
 
+/* ================================
+   NAVBAR
+================================ */
 .navbar {
-    background: var(--blanco);
+    background: linear-gradient(90deg, var(--azul), var(--azul-oscuro));
     border-bottom: 4px solid var(--verde);
     position: sticky;
     top: 0;
-    z-index: 50;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: 0.3s;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-container {
     max-width: 1200px;
     margin: auto;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
 }
 
 .navbar-brand {
     display: flex;
-    align-items: center;
     gap: 10px;
-    font-weight: 700;
-    color: var(--verde-oscuro);
+    align-items: center;
+    color: white;
     text-decoration: none;
-    font-size: 1.2rem;
 }
 
 .logo-sm {
     height: 40px;
 }
 
+/* LINKS */
 .navbar-links {
     display: flex;
     align-items: center;
@@ -73,151 +86,289 @@ body.publico {
 }
 
 .nav-item {
-    text-decoration: none;
-    color: var(--gris-oscuro);
-    font-weight: 500;
+    color: white;
     padding: 8px 14px;
     border-radius: 8px;
+    text-decoration: none;
     transition: 0.25s;
 }
 
 .nav-item:hover {
-    background: var(--verde);
-    color: white;
+    background: rgba(255, 255, 255, 0.15);
 }
 
+/* BOTÓN REGISTRO */
 .nav-item.registro {
     background: var(--amarillo);
+    color: #222;
     font-weight: 600;
 }
 
-/* HERO */
-
+/* ================================
+   HERO MEJORADO
+================================ */
 .hero {
     position: relative;
-    background: url('/images/hero-cam.jpg') center/cover no-repeat;
-    color: white;
+    background:
+        linear-gradient(120deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.45)),
+        url('/Imagenes/CAM Frente.png') center/cover no-repeat;
+
+    padding: 200px 20px 150px;
     text-align: center;
-    padding: 170px 20px 120px;
+    color: white;
+    overflow: hidden;
+}
+
+/* (Ya no necesitas overlay separado, pero lo dejo opcional) */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+}
+
+/* CONTENIDO */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    margin: auto;
+}
+
+/* BADGE */
+.hero-badge {
+    background: var(--amarillo);
+    color: #222;
+    padding: 6px 16px;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 18px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--sombra);
+}
+
+/* TÍTULO */
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* SUBTÍTULO */
+.hero-subtitle {
+    font-size: 1.15rem;
+    margin-bottom: 35px;
+    opacity: 0.95;
+}
+
+/* BOTONES */
+.hero-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-primary {
+    background: var(--amarillo);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #222;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* BOTÓN SECUNDARIO */
+.btn-secondary {
+    border: 2px solid white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #222;
+    transform: translateY(-3px);
+}
+
+/* EFECTO DECORATIVO SUTIL (opcional) */
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    z-index: 1;
 }
 
 .hero::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+    bottom: -120px;
+    right: -120px;
+    z-index: 1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 10;
-    max-width: 850px;
-    margin: auto;
-}
-
-.hero-title {
-    font-size: 2.9rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.hero-subtitle {
-    font-size: 1.15rem;
-    margin-bottom: 30px;
-}
-
-.hero-btn {
-    display: inline-block;
-    padding: 12px 28px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    margin: 6px;
-    transition: 0.25s;
-}
-
-.hero-btn--primary {
+/* BOTONES */
+.btn-primary {
     background: var(--amarillo);
-    color: #1a202c;
-}
-
-.hero-btn--primary:hover {
-    background: #f4c400;
-}
-
-.hero-btn--outline {
-    border: 2px solid white;
-    color: white;
-}
-
-.hero-btn--outline:hover {
-    background: white;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-weight: 600;
     color: #222;
+    text-decoration: none;
 }
 
-/* SECCIONES */
+.btn-secondary {
+    border: 2px solid white;
+    padding: 12px 26px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+}
 
+/* ================================
+   SECCIONES GENERALES
+================================ */
 .section {
     padding: 80px 20px;
-    max-width: 1200px;
-    margin: auto;
+    margin-bottom: 60px;
+    /* 👈 ESTO ES LO QUE TE FALTA */
 }
 
 .section-title {
+    text-align: center;
     font-size: 2rem;
-    text-align: center;
+    margin-bottom: 40px;
     color: var(--verde-oscuro);
-    margin-bottom: 25px;
 }
 
-.section-description {
-    text-align: center;
-    max-width: 700px;
-    margin: auto;
-    margin-bottom: 50px;
+.section-title-left {
+    margin-bottom: 20px;
 }
 
-.bg-soft {
-    background: #f9fafb;
+/* ================================
+   SPLIT (DIFERENCIADOR)
+================================ */
+.split {
+    display: flex;
+    gap: 60px;
+    align-items: center;
 }
 
-/* TARJETAS */
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
+.split-img img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: var(--sombra);
 }
 
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
+.split-text {
+    max-width: 500px;
+}
+
+/* TAGS */
+.tag {
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* ================================
+   TALLERES (ZIG ZAG)
+================================ */
+.taller-row {
+    display: flex;
+    gap: 50px;
+    margin-top: 60px;
+    align-items: center;
+}
+
+.taller-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.taller-row img {
+    width: 50%;
+    border-radius: 14px;
+    box-shadow: var(--sombra);
+}
+
+.taller-box {
+    width: 50%;
+    padding: 30px;
+    border-radius: 14px;
+    color: white;
     box-shadow: var(--sombra);
     transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-6px);
+.taller-box:hover {
+    transform: translateY(-5px);
 }
 
-/* STEPS */
+/* COLORES TALLERES */
+.verde {
+    background: var(--verde);
+}
+
+.azul {
+    background: var(--azul);
+}
+
+.rojo {
+    background: var(--rojo);
+}
+
+.madera {
+    background: #b08968;
+}
+
+.violeta {
+    background: #7c3aed;
+}
+
+/* ================================
+   PROCESO
+================================ */
+.bg-soft {
+    background: #f1f5f9;
+}
 
 .steps {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .step {
     background: white;
     padding: 25px;
-    border-radius: 10px;
+    border-radius: 12px;
     width: 250px;
-    box-shadow: var(--sombra);
     text-align: center;
+    box-shadow: var(--sombra);
 }
 
 .step-number {
@@ -225,59 +376,97 @@ body.publico {
     color: white;
     width: 40px;
     height: 40px;
+    margin: auto;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    margin: auto;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
-/* ABOUT */
-
-.about-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+/* ================================
+   ABOUT (IMAGEN + TEXTO)
+================================ */
+.about-split {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    margin-top: 40px;
 }
 
-.about-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
+.about-img img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
     box-shadow: var(--sombra);
 }
 
-/* CONTACTO */
+.about-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
+.about-block {
+    padding: 25px;
+    border-radius: 14px;
+    color: white;
+    box-shadow: var(--sombra);
+    transition: 0.3s;
+}
+
+.about-block:hover {
+    transform: translateY(-5px);
+}
+
+.about-block.verde {
+    background: var(--verde);
+}
+
+.about-block.azul {
+    background: var(--azul);
+}
+
+.about-block.amarillo {
+    background: var(--amarillo);
+    color: #222;
+}
+
+/* ================================
+   CONTACTO
+================================ */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
 }
 
 .contact-card {
     background: white;
-    padding: 25px;
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 12px;
     box-shadow: var(--sombra);
+    text-align: center;
 }
 
-/* FOOTER */
-
+/* ================================
+   FOOTER (COMBINA CON NAVBAR)
+================================ */
 .footer {
-    background: var(--verde-oscuro);
+    background: linear-gradient(40deg, var(--azul), var(--azul-oscuro));
+    border-top: 4px solid var(--verde);
     color: white;
-    padding: 40px 20px;
-    margin-top: 60px;
+    padding: 20px 10px;
+    margin-top: 80px;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
 }
 
@@ -294,24 +483,500 @@ body.publico {
     margin-top: 30px;
     text-align: center;
     font-size: 0.9rem;
+    opacity: 0.8;
 }
 
-/* RESPONSIVE */
-
+/* ================================
+   RESPONSIVE
+================================ */
 @media (max-width:768px) {
+
+    .split,
+    .about-split,
+    .taller-row,
+    .taller-row.reverse {
+        flex-direction: column;
+    }
+
+    .taller-row img,
+    .taller-box {
+        width: 100%;
+    }
 
     .hero-title {
         font-size: 2rem;
     }
+}
 
-    .navbar-container {
+.intro-text {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.requisitos {
+    max-width: 500px;
+    margin: auto;
+    list-style: none;
+}
+
+.requisitos li {
+    margin-bottom: 10px;
+}
+
+.step h4 {
+    margin-bottom: 10px;
+}
+
+/* =========================================================
+   SECTION: MODELO EDUCATIVO Y ACERCA DEL CAM
+   Diseño: Título superior + Zigzag Institucional
+========================================================= */
+
+/* Contenedor general que envuelve ambas partes */
+.about-vertical-content {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    width: 100%;
+}
+
+/* --- 1. MODELO EDUCATIVO (Título arriba, puntos debajo) --- */
+.modelo-vertical {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modelo-main-title-top {
+    font-size: 3rem;
+    color: var(--verde-oscuro);
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.modelo-items {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Estilo para los puntos del modelo educativo [cite: 136] */
+.card-inline {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+    border-left: 5px solid var(--verde);
+    transition: transform 0.3s ease;
+}
+
+.card-inline:hover {
+    transform: translateX(10px);
+}
+
+.card-inline h3 {
+    font-size: 1.4rem;
+    color: var(--gris-oscuro);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-inline p {
+    color: var(--gris-oscuro);
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* --- 2. ACERCA DEL CAM (Misión, Visión, Valores en ZigZag) --- */
+.about-zigzag {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    width: 100%;
+}
+
+/* Fila base */
+.about-row {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+}
+
+/* EFECTO ZIGZAG: Invierte las filas pares (Visión) */
+.about-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Reparto equitativo de espacio */
+.about-row .about-img,
+.about-row .about-block {
+    flex: 1;
+}
+
+/* Estilo de las imágenes institucionales */
+.about-img img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    display: block;
+}
+
+/* Cuadros de texto (Misión, Visión, Valores) [cite: 105, 107, 109] */
+.about-block {
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease;
+}
+
+.about-block:hover {
+    transform: scale(1.02);
+}
+
+.about-block h4 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.about-block p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.95;
+}
+
+/* Colores específicos de los bloques */
+.about-block.verde {
+    background: var(--verde);
+}
+
+.about-block.azul {
+    background: var(--azul);
+}
+
+.about-block.amarillo {
+    background: var(--amarillo);
+    color: #222;
+    /* Texto oscuro para contraste */
+}
+
+/* =========================================================
+   FOOTER UNIFICADO (Welcome & Dashboard) 
+   ========================================================= */
+
+.footer-final {
+    /* Gradiente coherente con la identidad institucional [cite: 143] */
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, #0c1222 100%) !important;
+    border-top: 4px solid var(--verde) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    /* Texto claro para legibilidad */
+    padding: 3rem 1rem 1.5rem;
+}
+
+/* Encabezados de columna */
+.footer-final h4 {
+    color: var(--blanco) !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* Enlaces y efectos */
+.footer-final .link-footer {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-final .link-footer:hover {
+    color: var(--amarillo) !important;
+    padding-left: 5px;
+    /* Efecto sutil de movimiento */
+}
+
+/* Bordes decorativos laterales para los títulos [cite: 102] */
+.cam-border-blue {
+    border-left: 4px solid var(--azul);
+    padding-left: 12px;
+}
+
+.cam-border-yellow {
+    border-left: 4px solid var(--amarillo);
+    padding-left: 12px;
+}
+
+/* Ajuste para iconos de contacto */
+.footer-final i {
+    width: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.footer-final .group:hover i {
+    transform: scale(1.2);
+}
+
+/* Línea de créditos final */
+.footer-copy {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+/* NAVBAR UNIVERSAL - Combinado con Footer */
+.navbar-universal {
+    background: linear-gradient(90deg, #1e4e8c 0%, #0c1222 100%) !important;
+    border-bottom: 4px solid #2f855a !important;
+    /* Mismo verde que el footer */
+}
+
+.nav-item-cam {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nav-item-cam:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffd600;
+    /* Amarillo institucional */
+}
+
+.nav-item-cam.active {
+    background-color: #2f855a;
+    /* Verde activo */
+    color: white !important;
+}
+
+/* Espaciado automático entre bloques de texto y títulos paraproceso.blade*/
+
+.ubicacion-box {
+    margin-top: 5rem;
+    padding-top: 3rem;
+}
+
+/* Mejora del contenedor de mapa */
+.mapa-container {
+    margin-top: 2rem;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    box-shadow: var(--sombra);
+}
+
+/* =========================================================
+   FORMULARIOS CAM (EDIT / CREATE / LOGIN)
+========================================================= */
+
+/* CONTENEDOR */
+.form-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+/* HEADER DEL FORM */
+.form-header {
+    background: linear-gradient(135deg, var(--azul), var(--azul-oscuro));
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.form-header h2 {
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.form-header p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* SECCIONES */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--azul);
+    margin-bottom: 15px;
+    border-left: 4px solid var(--verde);
+    padding-left: 10px;
+}
+
+/* LABEL */
+.form-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* INPUTS */
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+    background: #f9fafb;
+}
+
+/* EFECTO AL HACER CLICK */
+.form-input:focus {
+    outline: none;
+    border-color: var(--azul);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+/* SELECT */
+.form-select {
+    appearance: none;
+}
+
+/* TEXTAREA */
+.form-textarea {
+    resize: none;
+}
+
+/* FOTO */
+.form-photo {
+    background: #f1f5f9;
+    border: 2px dashed #cbd5f5;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* BOTONES */
+.form-actions {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-cancel {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.btn-cancel:hover {
+    color: var(--rojo);
+}
+
+.btn-save {
+    background: var(--verde);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    transition: 0.25s;
+}
+
+.btn-save:hover {
+    background: var(--verde-oscuro);
+    transform: translateY(-2px);
+}
+
+/* ================================
+   EVENTOS ESCOLARES
+================================ */
+
+.evento-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    margin-bottom: 50px;
+    transition: 0.3s;
+}
+
+.evento-card:hover {
+    transform: translateY(-5px);
+}
+
+.evento-title {
+    font-size: 1.5rem;
+    color: var(--azul-oscuro);
+    margin-bottom: 10px;
+}
+
+.evento-text {
+    margin-bottom: 20px;
+    color: var(--gris-oscuro);
+}
+
+/* GALERÍA 4 IMÁGENES */
+.evento-galeria {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.evento-galeria img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.evento-galeria img:hover {
+    transform: scale(1.05);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+
+    .about-row,
+    .about-row:nth-child(even) {
         flex-direction: column;
-        gap: 10px;
+        gap: 30px;
     }
 
-    .navbar-links {
-        flex-wrap: wrap;
-        justify-content: center;
+    .about-img img {
+        height: 300px;
     }
 
+    .modelo-main-title-top {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .evento-galeria {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

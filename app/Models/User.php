@@ -2,28 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'fotoqr',
         'foto',
         'identificador',
         'nombre',
         'apellidos',
-        'rol', // admin, docente, estudiante, visitante, padre
+        'rol',
         'email',
         'password',
         'telefono',
@@ -38,58 +31,35 @@ class User extends Authenticatable
         'ultimo_acceso',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'fecha_nacimiento' => 'date',
         ];
     }
 
-    // Relaciones
+    // --- RELACIONES ---
+
+    // Un estudiante tiene un responsable (Padre)
     public function responsable()
     {
         return $this->belongsTo(User::class, 'responsable_id');
     }
 
-    public function estudiantes()
+    // Un padre tiene muchos hijos (Estudiantes)
+    public function hijos()
     {
         return $this->hasMany(User::class, 'responsable_id');
     }
 
-    // Scopes (para filtrar por tipo)
-    public function scopeDocentes($query)
+    // --- AYUDANTES DE ROL ---
+    public function esEmpleado(): bool
     {
-        return $query->where('rol', 'docente');
-    }
-
-    public function scopeEstudiantes($query)
-    {
-        return $query->where('rol', 'estudiante');
-    }
-
-    public function scopeVisitantes($query)
-    {
-        return $query->where('rol', 'visitante');
-    }
-
-    public function scopePadres($query)
-    {
-        return $query->where('rol', 'padre');
+        // Roles administrativos y operativos definidos en tu reporte 
+        return in_array($this->rol, ['admin', 'docente', 'director', 'guardia', 'servicios_escolares']);
     }
 }

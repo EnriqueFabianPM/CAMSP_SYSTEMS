@@ -20,6 +20,7 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('Admin123*'),
             'telefono' => '8112345678',
             'direccion' => 'Oficina Principal',
+            'email_verified_at' => now(),
             'estatus' => 'Activo',
         ]);
 
