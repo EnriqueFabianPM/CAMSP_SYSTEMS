@@ -250,7 +250,7 @@
                     "Cada fotografía cuenta una historia de superación y alegría de nuestros alumnos."
                 </p>
 
-                <a href="{{ route('eventos') }}" class="btn-primary"
+                <a href="{{ route('eventos.public') }}" class="btn-primary"
                     style="display: inline-block; margin-top: 25px; background: var(--azul-oscuro);">
                     Explorar Eventos
                 </a>

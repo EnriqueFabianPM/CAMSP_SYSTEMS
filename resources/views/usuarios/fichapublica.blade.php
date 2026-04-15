@@ -101,7 +101,7 @@
                             class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Responsable
                             Familiar</label>
                         <p class="font-bold text-slate-700">
-                            {{ $usuario->responsable->nombre ?? 'Maestro / Empleado General' }}
+                            {{ $usuario->responsable->nombre ?? 'Ninguno / No Aplica' }}
                         </p>
                     </div>
                 </div>

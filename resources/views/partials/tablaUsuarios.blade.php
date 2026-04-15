@@ -1,5 +1,17 @@
 @php
     $user = auth()->user();
+
+    $ruta = Route::currentRouteName();
+
+    $rolFijo = null;
+
+    if ($ruta === 'estudiantes.index') {
+        $rolFijo = 'estudiante';
+    } elseif ($ruta === 'empleados.index') {
+        $rolFijo = 'empleado';
+    } elseif ($ruta === 'visitantes.index') {
+        $rolFijo = 'visitante';
+    }
 @endphp
 
 <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
@@ -18,19 +30,51 @@
 
             {{-- 🏷️ FILTRO POR ROL --}}
             <select name="rol"
-                class="text-xs px-3 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-400">
-                <option value="">Todos los roles</option>
-                <option value="admin" {{ request('rol') == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="docente" {{ request('rol') == 'docente' ? 'selected' : '' }}>Docente</option>
-                <option value="estudiante" {{ request('rol') == 'estudiante' ? 'selected' : '' }}>Estudiante</option>
-                <option value="padre" {{ request('rol') == 'padre' ? 'selected' : '' }}>Padre</option>
-                <option value="director" {{ request('rol') == 'director' ? 'selected' : '' }}>Director</option>
-                <option value="guardia" {{ request('rol') == 'guardia' ? 'selected' : '' }}>Guardia</option>
-                <option value="servicios_escolares" {{ request('rol') == 'servicios_escolares' ? 'selected' : '' }}>
-                    Servicios Escolares
-                </option>
-                <option value="visitante" {{ request('rol') == 'visitante' ? 'selected' : '' }}>Visitante</option>
-            </select>
+    class="text-xs px-3 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-400"
+    {{ $rolFijo ? 'disabled' : '' }}>
+    
+    <option value="">Todos los roles</option>
+
+    <option value="admin"
+        {{ ($rolFijo === 'admin' || request('rol') == 'admin') ? 'selected' : '' }}>
+        Admin
+    </option>
+
+    <option value="docente"
+        {{ ($rolFijo === 'empleado' && 'docente') || request('rol') == 'docente' ? 'selected' : '' }}>
+        Docente
+    </option>
+
+    <option value="estudiante"
+        {{ ($rolFijo === 'estudiante' || request('rol') == 'estudiante') ? 'selected' : '' }}>
+        Estudiante
+    </option>
+
+    <option value="padre"
+        {{ request('rol') == 'padre' ? 'selected' : '' }}>
+        Padre
+    </option>
+
+    <option value="director"
+        {{ request('rol') == 'director' ? 'selected' : '' }}>
+        Director
+    </option>
+
+    <option value="guardia"
+        {{ request('rol') == 'guardia' ? 'selected' : '' }}>
+        Guardia
+    </option>
+
+    <option value="servicios_escolares"
+        {{ request('rol') == 'servicios_escolares' ? 'selected' : '' }}>
+        Servicios Escolares
+    </option>
+
+    <option value="visitante"
+        {{ ($rolFijo === 'visitante' || request('rol') == 'visitante') ? 'selected' : '' }}>
+        Visitante
+    </option>
+</select>
 
             {{-- 🛠️ FILTRO POR TALLER --}}
             <input type="text" name="taller" placeholder="Taller..." value="{{ request('taller') }}"
@@ -152,13 +196,25 @@
 
                             {{-- QR --}}
                             <td class="px-6 py-4 text-center">
-                                @if($usuario->fotoqr)
-                                    <img src="{{ asset('storage/' . $usuario->fotoqr) }}"
-                                        class="w-10 h-10 mx-auto bg-white p-1 rounded-lg shadow">
-                                @else
-                                    <span class="text-[9px] text-slate-400">Sin QR</span>
-                                @endif
-                            </td>
+
+    <div id="qr-container-{{ $usuario->id }}">
+        
+        @if($usuario->fotoqr)
+            {{-- QR YA EXISTE --}}
+            <img src="{{ asset('storage/' . $usuario->fotoqr) }}"
+                class="w-12 h-12 mx-auto bg-white p-1 rounded-lg shadow">
+        @else
+            {{-- BOTÓN GENERAR --}}
+            <button 
+                onclick="generarQR('{{ $usuario->identificador }}', {{ $usuario->id }})"
+                class="bg-blue-500 text-white text-[10px] px-3 py-1 rounded-lg hover:bg-blue-600">
+                Generar QR
+            </button>
+        @endif
+
+    </div>
+
+</td>
 
                         @endif
 
@@ -215,3 +271,55 @@
         </table>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+function generarQR(identificador, userId) {
+
+    const container = document.getElementById('qr-container-' + userId);
+
+    // Crear canvas temporal
+    const canvas = document.createElement('canvas');
+
+    QRCode.toCanvas(canvas, identificador, function (error) {
+        if (error) return console.error(error);
+
+        // Convertir a base64
+        const base64 = canvas.toDataURL('image/png');
+
+        // Enviar a Laravel
+        fetch(`/gestion/usuarios/${identificador}/update-qr`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                qrCodeData: base64
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.success) {
+
+                // 🔥 REEMPLAZAR BOTÓN POR IMAGEN
+                container.innerHTML = `
+                    <img src="${data.filePath}" 
+                        class="w-12 h-12 mx-auto bg-white p-1 rounded-lg shadow">
+                `;
+
+            } else {
+                alert('Error al generar QR');
+            }
+
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Error en servidor');
+        });
+
+    });
+}
+</script>

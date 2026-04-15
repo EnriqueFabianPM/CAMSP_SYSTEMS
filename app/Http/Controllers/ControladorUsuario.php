@@ -292,4 +292,89 @@ class ControladorUsuario extends Controller
 
         return view('usuarios.fichaPublica', compact('usuario'));
     }
+
+    public function empleados()
+    {
+        $user = auth()->user();
+
+        $query = User::whereIn('rol', ['docente', 'servicios_escolares', 'director']);
+
+        if ($user->rol !== 'admin') {
+            $query->where('rol', '!=', 'admin');
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('empleados.index', compact('usuarios'));
+    }
+
+    public function estudiantes()
+    {
+        $user = auth()->user();
+
+        $query = User::where('rol', 'estudiante');
+
+        if ($user->rol === 'padre') {
+            $query->where('responsable_id', $user->id);
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('estudiantes.index', compact('usuarios'));
+    }
+
+    public function visitantes()
+    {
+        $user = auth()->user();
+
+        $query = User::where('rol', 'visitante');
+
+        // 🔒 visitante solo ve visitantes
+        if ($user->rol === 'visitante') {
+            $query->where('id', $user->id);
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('visitantes.index', compact('usuarios'));
+    }
+
+    public function consultaEstudiantes(Request $request)
+    {
+        $query = User::where('rol', 'estudiante');
+
+        if ($request->filled('nombre')) {
+            $query->where('nombre', 'like', '%' . $request->nombre . '%');
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('estudiantes.consulta', compact('usuarios'));
+    }
+
+    public function consultaEmpleados(Request $request)
+    {
+        $query = User::whereIn('rol', ['docente', 'director', 'servicios_escolares']);
+
+        if ($request->filled('nombre')) {
+            $query->where('nombre', 'like', '%' . $request->nombre . '%');
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('empleados.consulta', compact('usuarios'));
+    }
+
+    public function consultaVisitantes(Request $request)
+    {
+        $query = User::where('rol', 'visitante');
+
+        if ($request->filled('nombre')) {
+            $query->where('nombre', 'like', '%' . $request->nombre . '%');
+        }
+
+        $usuarios = $query->paginate(15);
+
+        return view('visitantes.consulta', compact('usuarios'));
+    }
 }

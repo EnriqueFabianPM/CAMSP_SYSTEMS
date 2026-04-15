@@ -44,30 +44,23 @@
         {{-- Centro: Enlaces Dinámicos --}}
         <div class="hidden lg:flex items-center space-x-2">
             <a href="{{ route('welcome') }}" class="nav-item-cam {{ Route::is('welcome') ? 'active' : '' }}">
-                <i class="fas fa-home mr-1"></i> Inicio
+                <i class="fas fa-home mr-1"></i> Pagina de Inicio
             </a>
 
             {{-- Mostrar Talleres e Inscripción SOLO si NO estás en el Dashboard --}}
             @if(!Request::is('dashboard*') && !Request::is('admin*') && !Request::is('gestion*') && !Request::is('usuarios*'))
-                <a href="{{ route('talleres') }}"
-                    class="nav-item-cam {{ Route::is('talleres') ? 'active' : '' }}">Talleres</a>
+                <a href="{{ route('talleres') }}" class="nav-item-cam {{ Route::is('talleres') ? 'active' : '' }}">Talleres
+                    del CAM</a>
                 <a href="{{ route('proceso') }}"
-                    class="nav-item-cam {{ Route::is('proceso') ? 'active' : '' }}">Inscripción</a>
-                <a href="{{ route('eventos') }}"
-                    class="nav-item-cam {{ Route::is('proceso') ? 'active' : '' }}">Eventos</a>
+                    class="nav-item-cam {{ Route::is('proceso') ? 'active' : '' }}">Inscripciónes y requisitos</a>
+                <a href="{{ route('eventos.public') }}"
+                    class="nav-item-cam {{ Route::is('eventos.public') ? 'active' : '' }}">Cartelera de Eventos</a>
             @endif
 
             @auth
                 <a href="{{ route('dashboard') }}" class="nav-item-cam {{ Route::is('dashboard') ? 'active' : '' }}">
-                    <i class="fas fa-chart-line mr-1"></i> Mi Panel
+                    <i class="fas fa-chart-line mr-1"></i> Panel de Control
                 </a>
-
-                @if(Auth::user()->esEmpleado())
-                    <a href="{{ route('usuarios.index') }}"
-                        class="nav-item-cam {{ Route::is('usuarios.index') ? 'active' : '' }}">
-                        <i class="fas fa-users-cog mr-1"></i> Usuarios
-                    </a>
-                @endif
             @endauth
         </div>
 
@@ -87,9 +80,9 @@
                 </a>
 
                 {{-- Botón de Configuración (Breeze Profile) --}}
-                <a href="{{ route('profile.edit') }}" class="text-white hover:text-yellow-400 transition-colors"
-                    title="Configuración de Perfil">
-                    <i class="fa-solid fa-user-gear text-xl"></i>
+                <a href="{{ route('usuarios.fichaPublica', Auth::user()->identificador) }}"
+                    class="text-white hover:text-yellow-400 transition-transform hover:scale-110 p-2" title="Mi Perfil">
+                    <i class="fa-solid fa-circle-user text-2xl"></i>
                 </a>
 
                 {{-- Botón Rojo de Salir --}}
@@ -140,7 +133,7 @@
                                     class="fas fa-chevron-right mr-2 text-xs"></i>Talleres</a></li>
                         <li><a href="{{ route('proceso') }}" class="link-footer transition-all"><i
                                     class="fas fa-chevron-right mr-2 text-xs"></i>Inscripción</a></li>
-                        <li><a href="{{ route('eventos') }}" class="link-footer transition-all"><i
+                        <li><a href="{{ route('eventos.public') }}" class="link-footer transition-all"><i
                                     class="fas fa-chevron-right mr-2 text-xs"></i>Eventos</a></li>
                         @auth
                             <li><a href="{{ route('dashboard') }}"

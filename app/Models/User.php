@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+// 🔥 SPATIE LOGS
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
 
     protected $fillable = [
         'fotoqr',
@@ -42,6 +46,24 @@ class User extends Authenticatable
         ];
     }
 
+    // 🔥 CONFIGURACIÓN DE LOGS
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('usuarios') // 👈 nombre del módulo
+            ->logOnly([
+                'nombre',
+                'apellidos',
+                'email',
+                'rol',
+                'estatus',
+                'taller_asignado',
+                'responsable_id'
+            ]) // 👈 qué campos registrar
+            ->logOnlyDirty() // 👈 solo cambios reales
+            ->dontSubmitEmptyLogs(); // 👈 evita logs vacíos
+    }
+
     // --- RELACIONES ---
 
     // Un estudiante tiene un responsable (Padre)
@@ -59,7 +81,22 @@ class User extends Authenticatable
     // --- AYUDANTES DE ROL ---
     public function esEmpleado(): bool
     {
-        // Roles administrativos y operativos definidos en tu reporte 
-        return in_array($this->rol, ['admin', 'docente', 'director', 'guardia', 'servicios_escolares']);
+        return in_array($this->rol, [
+            'admin',
+            'docente',
+            'director',
+            'guardia',
+            'servicios_escolares'
+        ]);
+    }
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return match ($eventName) {
+            'created' => 'Usuario creado',
+            'updated' => 'Usuario actualizado',
+            'deleted' => 'Usuario eliminado',
+            default => $eventName,
+        };
     }
 }

@@ -957,8 +957,175 @@ body.publico {
     transform: scale(1.05);
 }
 
+/* =========================================================
+   TALLERES (PROPORCIÓN INVERTIDA: 70% IMAGEN / 30% TEXTO)
+   Impacto visual: Imagen protagonista, texto compacto.
+========================================================= */
+
+.taller-row {
+    display: flex;
+    gap: 25px;
+    /* Espacio entre imagen y texto */
+    margin-top: 60px;
+    align-items: stretch;
+    /* Estira ambos para que midan lo mismo siempre */
+}
+
+.taller-row.reverse {
+    flex-direction: row-reverse;
+}
+
+/* 1. LA IMAGEN PROTAGONISTA (70%) */
+.taller-row img {
+    width: 70%;
+    /* Ocupa la mayor parte del ancho */
+    height: 500px;
+    /* Altura fija para un rectángulo elegante */
+    object-fit: cover;
+    /* Recorta la imagen sin deformarla */
+    object-position: center;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease;
+}
+
+/* 2. LA CAJA DE INFORMACIÓN COMPACTA (30%) */
+.taller-box {
+    width: 30%;
+    /* Caja más estrecha y "cuadrada" */
+    padding: 30px;
+    /* Padding ajustado para cajas pequeñas */
+    border-radius: 20px;
+    color: white;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centra el texto verticalmente */
+    min-height: 400px;
+    /* Coincide con la altura de la imagen */
+}
+
+/* Ajustes de tipografía para el contenedor estrecho */
+.taller-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.taller-box p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.taller-box ul {
+    list-style: none;
+    font-size: 0.85rem;
+}
+
+.taller-box li {
+    margin-bottom: 5px;
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+/* ===== 5 módulos (ADMIN: 3 arriba, 2 centrados abajo) ===== */
+.dashboard-grid.admin {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* arriba (3 cards) */
+.dashboard-grid.admin .dashboard-card:nth-child(1) {
+    grid-column: span 2;
+}
+
+.dashboard-grid.admin .dashboard-card:nth-child(2) {
+    grid-column: span 2;
+}
+
+.dashboard-grid.admin .dashboard-card:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* abajo (centrados) */
+.dashboard-grid.admin .dashboard-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.dashboard-grid.admin .dashboard-card:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+/* ===== 4 módulos (2x2) ===== */
+.dashboard-grid.four {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* ===== 3 módulos (2 arriba, 1 centrado) ===== */
+.dashboard-grid.three {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.dashboard-grid.three .dashboard-card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 400px;
+}
+
+
+/* ===== 2 módulos (izquierda y derecha) ===== */
+.dashboard-grid.two {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* ===== 1 módulo (centrado) ===== */
+.dashboard-grid.one {
+    grid-template-columns: 1fr;
+}
+
+.dashboard-card {
+    transition: all 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.dashboard-grid.one .dashboard-card {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
 /* --- RESPONSIVE --- */
+
 @media (max-width: 992px) {
+
+    /* En tablets, pasamos a diseño vertical */
+    .taller-row,
+    .taller-row.reverse {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .taller-row img,
+    .taller-box {
+        width: 100% !important;
+        min-height: auto;
+    }
+
+    .taller-row img {
+        height: 300px;
+    }
 
     .about-row,
     .about-row:nth-child(even) {
@@ -978,5 +1145,13 @@ body.publico {
 @media (max-width: 768px) {
     .evento-galeria {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .taller-row img {
+        height: 250px;
+    }
+
+    .taller-box {
+        padding: 25px;
     }
 }

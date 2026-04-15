@@ -42,6 +42,10 @@
                         class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 text-center shadow-lg shadow-blue-200 transition-all">
                         + NUEVO REGISTRO
                     </a>
+                    <a href="{{ route('usuarios.export') }}"
+                        class="bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-700 shadow-lg shadow-red-200 transition-all">
+                        <i class="fas fa-file-excel mr-2"></i> EXPORTAR EXCEL
+                    </a>
                 </div>
             </div>
         @endif

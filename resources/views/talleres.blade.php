@@ -27,86 +27,92 @@
 
         {{-- CARPINTERÍA --}}
         <div class="taller-row">
-            <img src="/images/carpinteria.jpg">
+            <img src="/Imagenes/CAM Carpinteria.jpg">
             <div class="taller-box madera">
-                <h3>🪵 Carpintería</h3>
+                <h3>🪵 Carpintería y Ebanistería Básica</h3>
                 <p>
-                    Desarrollo de habilidades manuales mediante la elaboración de muebles
-                    y objetos de madera. Los estudiantes aprenden el uso de herramientas,
-                    medidas de seguridad y procesos de producción.
+                    Este taller potencia la precisión y el control motor. Los estudiantes transforman la materia prima en
+                    piezas funcionales, desarrollando procesos lógicos que van desde el diseño y lijado hasta el ensamble
+                    final de mobiliario.
                 </p>
                 <ul>
-                    <li>✔ Uso de herramientas básicas</li>
-                    <li>✔ Trabajo en equipo</li>
-                    <li>✔ Producción de objetos útiles</li>
+                    <li>✔ Manejo seguro de herramientas manuales y eléctricas</li>
+                    <li>✔ Interpretación de medidas y trazos técnicos</li>
+                    <li>✔ Acabados, barnizado y restauración de muebles</li>
+                    <li>✔ Disciplina operativa y organización del taller</li>
                 </ul>
             </div>
         </div>
 
         {{-- JARDINERÍA --}}
         <div class="taller-row reverse">
-            <img src="/images/jardineria.jpg">
+            <img src="/Imagenes/CAM Jardineria.jpg">
             <div class="taller-box verde">
-                <h3>🌱 Jardinería</h3>
+                <h3>🌱 Jardinería y Cultivo Sustentable</h3>
                 <p>
-                    Enfocado en el cuidado del medio ambiente, este taller desarrolla habilidades
-                    relacionadas con el mantenimiento de áreas verdes, siembra y cuidado de plantas.
+                    Un espacio terapéutico y productivo donde se enseña el ciclo de vida de las plantas. Los alumnos
+                    aprenden sobre botánica aplicada, producción de hortalizas y mantenimiento estético de espacios verdes.
                 </p>
                 <ul>
-                    <li>✔ Cuidado de plantas</li>
-                    <li>✔ Trabajo al aire libre</li>
-                    <li>✔ Responsabilidad ambiental</li>
+                    <li>✔ Técnicas de siembra, riego y fertilización orgánica</li>
+                    <li>✔ Creación de huertos escolares y composta</li>
+                    <li>✔ Uso correcto de herramientas de labranza</li>
+                    <li>✔ Conciencia ecológica y cuidado del medio ambiente</li>
                 </ul>
             </div>
         </div>
 
         {{-- MANTENIMIENTO --}}
         <div class="taller-row">
-            <img src="/images/mantenimiento.jpg">
+            <img src="/Imagenes/CAM Mantenimiento.jpg">
             <div class="taller-box azul">
-                <h3>🔧 Mantenimiento</h3>
+                <h3>🔧 Mantenimiento de Edificios</h3>
                 <p>
-                    Los estudiantes aprenden tareas básicas de reparación, mantenimiento
-                    y uso de herramientas para resolver problemas cotidianos.
+                    Capacita a los estudiantes para identificar y resolver necesidades técnicas básicas. Se enfoca en la
+                    resolución de problemas prácticos que fomentan la independencia en el hogar y en entornos laborales.
                 </p>
                 <ul>
-                    <li>✔ Electricidad básica</li>
-                    <li>✔ Reparaciones sencillas</li>
-                    <li>✔ Solución de problemas</li>
+                    <li>✔ Introducción a la electricidad y plomería básica</li>
+                    <li>✔ Resane de muros y aplicación de pintura</li>
+                    <li>✔ Reparación de desperfectos cotidianos</li>
+                    <li>✔ Protocolos de seguridad industrial personal</li>
                 </ul>
             </div>
         </div>
 
         {{-- COCINA --}}
         <div class="taller-row reverse">
-            <img src="/images/cocina.jpg">
+            <img src="/Imagenes/CAM Cocina.jpg">
             <div class="taller-box rojo">
-                <h3>🍞 Cocina</h3>
+                <h3>🍞 Cocina y Repostería Funcional</h3>
                 <p>
-                    Desarrollo de habilidades culinarias enfocadas en la preparación de alimentos,
-                    higiene y posibles actividades productivas.
+                    Formación enfocada en la autonomía alimentaria y el emprendimiento. Se trabajan estándares de calidad
+                    comercial, permitiendo a los alumnos integrarse a servicios de alimentación o iniciar proyectos de venta
+                    propios.
                 </p>
                 <ul>
-                    <li>✔ Preparación de alimentos</li>
-                    <li>✔ Higiene y seguridad</li>
-                    <li>✔ Producción para venta</li>
+                    <li>✔ Manejo higiénico de alimentos (Distintivo H)</li>
+                    <li>✔ Preparación de recetas, panadería y repostería</li>
+                    <li>✔ Control de inventarios y costeo básico de productos</li>
+                    <li>✔ Servicio al cliente y etiqueta de mesa</li>
                 </ul>
             </div>
         </div>
 
         {{-- MANUALIDADES --}}
         <div class="taller-row">
-            <img src="/images/manualidades.jpg">
+            <img src="/Imagenes/CAM Manualidades.jpg">
             <div class="taller-box violeta">
-                <h3>🎨 Manualidades</h3>
+                <h3>🎨 Artes Visuales y Producción Artesanal</h3>
                 <p>
-                    Fomenta la creatividad mediante la elaboración de productos artesanales,
-                    desarrollando habilidades motrices finas y expresión artística.
+                    Un taller diseñado para canalizar la expresión artística en productos comercializables. Se enfoca en la
+                    motricidad fina y la atención al detalle, creando artículos únicos con valor estético y comercial.
                 </p>
                 <ul>
-                    <li>✔ Creatividad</li>
-                    <li>✔ Motricidad fina</li>
-                    <li>✔ Elaboración de productos</li>
+                    <li>✔ Técnicas de pintura, modelado y ensamble</li>
+                    <li>✔ Reciclaje creativo y transformación de materiales</li>
+                    <li>✔ Diseño de empaques y presentación de productos</li>
+                    <li>✔ Desarrollo de la paciencia y concentración sostenida</li>
                 </ul>
             </div>
         </div>

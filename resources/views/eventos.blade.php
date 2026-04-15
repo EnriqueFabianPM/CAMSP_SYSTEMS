@@ -12,8 +12,7 @@
             </h2>
             <p class="intro-text text-slate-600 text-lg leading-relaxed">
                 En el CAM San Pedro, cada evento es una oportunidad para derribar barreras.
-                Nuestras actividades están diseñadas para potenciar la autonomía, celebrar la diversidad
-                y crear lazos sólidos entre estudiantes, familias y la comunidad de Nuevo León.
+                Nuestras actividades están diseñadas para potenciar la autonomía y crear lazos sólidos.
             </p>
         </div>
 
@@ -23,302 +22,309 @@
                 <i class="fas fa-hands-helping"></i>
                 <div>
                     <h4>Inclusión Real</h4>
-                    <p>Participación sin etiquetas, respetando capacidades individuales.</p>
+                    <p>Participación sin etiquetas.</p>
                 </div>
             </div>
             <div class="info-card green">
                 <i class="fas fa-graduation-cap"></i>
                 <div>
                     <h4>Aprendizaje Vivencial</h4>
-                    <p>Experiencias fuera del aula con impacto real.</p>
+                    <p>Experiencias con impacto real.</p>
                 </div>
             </div>
             <div class="info-card purple">
                 <i class="fas fa-users"></i>
                 <div>
                     <h4>Vínculo Familiar</h4>
-                    <p>Padres involucrados en el crecimiento de sus hijos.</p>
+                    <p>Padres involucrados.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- SECCIÓN DE EVENTOS (Un evento por fila) --}}
-    <section class="section container space-y-12">
+    {{-- CONTENEDOR DE EVENTOS EN UNA SOLA FILA (ANCHO COMPLETO) --}}
+    <section class="container pb-20">
+        <div class="flex flex-col gap-16"> {{-- Cambiado a Flex Column para una sola fila por evento --}}
 
-        @php
-            $eventos = [
-                [
-                    "titulo" => "🎉 Actividad Final de Informática",
-                    "fecha" => "26 de marzo 2025",
-                    "descripcion" => "Elaboración de puestos de comida para actividad final.",
-                    "link" => "https://www.facebook.com/camlaboralsanpedro"
-                ],
-                [
-                    "titulo" => "🎓 Asamblea de Marzo",
-                    "fecha" => "24 de marzo 2025",
-                    "descripcion" => "Asamblea para la celebración de efemérides de marzo.",
-                    "link" => "https://www.facebook.com/media/set?vanity=camlaboralsanpedro&set=a.4528365904044568"
-                ],
-                [
-                    "titulo" => "🎓 Asamblea de Febrero",
-                    "fecha" => "27 de febrero 2025",
-                    "descripcion" => "Asamblea para la celebración de efemérides de febrero.",
-                    "link" => "https://www.facebook.com/media/set/?vanity=camlaboralsanpedro&set=a.4499212796959879"
-                ],
-                [
-                    "titulo" => "🎉 Red de Padres",
-                    "fecha" => "Diciembre 2025",
-                    "descripcion" => "Evento de convivencia familiar.",
-                    "link" => "https://www.facebook.com/media/set/?vanity=camlaboralsanpedro&set=a.4470606916487134"
-                ],
-                [
-                    "titulo" => "🌱 Huerto Escolar",
-                    "fecha" => "Noviembre 2025",
-                    "descripcion" => "Actividad de siembra y cuidado ambiental.",
-                    "link" => "https://facebook.com/CAMSanPedro/albums/ejemplo2"
-                ],
-                [
-                    "titulo" => "🎓 Graduación",
-                    "fecha" => "Diciembre 2025",
-                    "descripcion" => "Entrega de reconocimientos.",
-                    "link" => "https://facebook.com/CAMSanPedro/albums/ejemplo3"
-                ],
-                [
-                    "titulo" => "🎭 Actividad Cultural",
-                    "fecha" => "Evento",
-                    "descripcion" => "Presentaciones artísticas.",
-                    "link" => "#"
-                ],
-                [
-                    "titulo" => "🎶 Música",
-                    "fecha" => "Evento",
-                    "descripcion" => "Actividad recreativa musical.",
-                    "link" => "#"
-                ],
-                [
-                    "titulo" => "📚 Académico",
-                    "fecha" => "Evento",
-                    "descripcion" => "Actividades educativas.",
-                    "link" => "#"
-                ],
-                [
-                    "titulo" => "🏆 Logros",
-                    "fecha" => "Evento",
-                    "descripcion" => "Reconocimiento a estudiantes.",
-                    "link" => "#"
-                ],
-            ];
-        @endphp
+            @forelse ($eventos as $evento)
+                <div class="evento-card-horizontal">
 
-        @foreach ($eventos as $i => $evento)
-            @php
-                $ext = ($i == 0) ? 'jpeg' : 'jpg';
-            @endphp
+                    {{-- PARTE SUPERIOR: SLIDER --}}
+                    <div class="evento-img-container" id="slider-{{ $evento->id }}">
+                        <div class="slider-wrapper">
+                            @if($evento->imagenes && count($evento->imagenes))
+                                @foreach($evento->imagenes as $index => $img)
+                                    <div class="slide {{ $index === 0 ? 'active' : '' }}">
+                                        <img src="{{ asset($img) }}" alt="{{ $evento->titulo }}" class="main-img"
+                                            onclick="openModal('{{ asset($img) }}')">
+                                    </div>
+                                @endforeach
 
-            <div class="evento-card-full">
-                <div class="p-8">
+                                @if(count($evento->imagenes) > 1)
+                                    <button class="slider-arrow prev"
+                                        onclick="moveSlide('slider-{{ $evento->id }}', -1)">&#10094;</button>
+                                    <button class="slider-arrow next"
+                                        onclick="moveSlide('slider-{{ $evento->id }}', 1)">&#10095;</button>
+                                @endif
+                            @else
+                                <img src="{{ asset('Imagenes/default.jpg') }}" class="main-img">
+                            @endif
+                        </div>
 
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                        <h3 class="evento-title-big">
-                            {{ $evento['titulo'] }}
-                        </h3>
-                        <span class="evento-badge-large">
-                            <i class="fas fa-calendar-alt mr-2"></i> {{ $evento['fecha'] }}
+                        <span class="evento-badge-float">
+                            {{ $evento->fecha ? $evento->fecha->format('d/m/Y') : 'Sin fecha' }}
                         </span>
                     </div>
 
-                    <p class="evento-text-large mb-8">
-                        {{ $evento['descripcion'] }}
-                    </p>
+                    {{-- PARTE INFERIOR: MINIATURAS Y TEXTO --}}
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
 
-                    <div class="evento-galeria-grande">
-                        <img src="{{ asset('Imagenes/CAM Evento' . $i . 'A.' . $ext) }}">
-                        <img src="{{ asset('Imagenes/CAM Evento' . $i . 'B.' . $ext) }}">
-                        <img src="{{ asset('Imagenes/CAM Evento' . $i . 'C.' . $ext) }}">
-                        <img src="{{ asset('Imagenes/CAM Evento' . $i . 'D.' . $ext) }}">
+                            {{-- MINIATURAS (Debajo de la imagen principal) --}}
+                            <div class="w-full md:w-1/3">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Galería del evento
+                                </h4>
+                                <div class="grid grid-cols-4 gap-2">
+                                    @if($evento->imagenes && count($evento->imagenes))
+                                        @foreach($evento->imagenes as $img)
+                                            <img src="{{ asset($img) }}"
+                                                class="h-20 w-full object-cover rounded-xl cursor-pointer hover:opacity-75 transition"
+                                                onclick="openModal('{{ asset($img) }}')">
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- CONTENIDO DE TEXTO --}}
+                            <div class="w-full md:w-2/3 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="evento-title-grid">{{ $evento->titulo }}</h3>
+                                    <p class="evento-text-grid">
+                                        {{ $evento->descripcion ?? 'Sin descripción disponible.' }}
+                                    </p>
+                                </div>
+
+                                <div class="mt-8 flex justify-between items-center border-t pt-6">
+                                    @if($evento->link)
+                                        <a href="{{ $evento->link }}" target="_blank" class="btn-fb-style">
+                                            <i class="fab fa-facebook mr-2"></i> ÁLBUM COMPLETO EN FACEBOOK
+                                        </a>
+                                    @endif
+                                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase">CAM SAN
+                                        PEDRO</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mt-8 flex justify-end">
-                        <a href="{{ $evento['link'] }}" target="_blank" class="evento-btn-wide">
-                            <i class="fab fa-facebook mr-2"></i> VER ÁLBUM COMPLETO
-                        </a>
-                    </div>
-
                 </div>
-            </div>
-        @endforeach
+            @empty
+                <div class="text-center text-slate-400 py-20">
+                    No hay eventos disponibles
+                </div>
+            @endforelse
 
+        </div>
     </section>
 
-    {{-- ESTILOS ACTUALIZADOS --}}
+    {{-- MODAL LIGHTBOX --}}
+    <div id="imageModal" class="lightbox-modal" onclick="closeModal()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="imgFull">
+        <div id="caption">Haz clic fuera para cerrar</div>
+    </div>
+
     <style>
-        /* INFO CARDS (Iguales) */
-        .info-card {
-            display: flex;
-            gap: 15px;
-            padding: 20px;
-            border-radius: 16px;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .info-card i {
-            padding: 12px;
-            border-radius: 10px;
-            color: white;
-        }
-
-        .info-card h4 {
-            font-weight: 800;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .info-card.blue {
-            background: #eff6ff;
-        }
-
-        .info-card.blue i {
-            background: #2563eb;
-        }
-
-        .info-card.green {
-            background: #ecfdf5;
-        }
-
-        .info-card.green i {
-            background: #059669;
-        }
-
-        .info-card.purple {
-            background: #f5f3ff;
-        }
-
-        .info-card.purple i {
-            background: #7c3aed;
-        }
-
-        /* EVENTOS FULL WIDTH */
-        .evento-card-full {
+        .evento-card-horizontal {
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            border-left: 10px solid;
-            /* Cambié el borde al lado para que luzca mejor en filas largas */
-            transition: 0.4s;
+            border-radius: 40px;
             overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            transition: 0.4s ease;
+            border: 1px solid #f1f5f9;
         }
 
-        .evento-card-full:hover {
+        .evento-card-horizontal:hover {
             transform: scale(1.01);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         }
 
-        .evento-title-big {
-            font-weight: 900;
-            font-size: 24px;
-            color: #1e293b;
-            letter-spacing: -0.05em;
+        .evento-img-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            /* Imagen mucho más grande para el ancho completo */
+            background: #f8fafc;
         }
 
-        .evento-text-large {
-            font-size: 16px;
-            color: #64748b;
-            line-height: 1.6;
+        .slider-wrapper,
+        .slide,
+        .main-img {
+            width: 100%;
+            height: 100%;
         }
 
-        /* GALERÍA GRANDE */
-        .evento-galeria-grande {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            /* 1 foto por fila en móvil */
-            gap: 15px;
+        .slide {
+            display: none;
         }
 
-        @media (min-width: 768px) {
-            .evento-galeria-grande {
-                grid-template-columns: repeat(4, 1fr);
-                /* 4 fotos en fila en PC */
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .main-img {
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
             }
         }
 
-        .evento-galeria-grande img {
-            width: 100%;
-            height: 250px;
-            /* AQUÍ AJUSTAS EL TAMAÑO DE LAS IMÁGENES */
-            object-fit: cover;
-            border-radius: 20px;
-            transition: 0.5s;
+        /* FLECHAS */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            color: #1e293b;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             cursor: pointer;
-        }
-
-        .evento-galeria-grande img:hover {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-        }
-
-        /* BADGE Y BOTÓN */
-        .evento-badge-large {
-            font-size: 12px;
-            font-weight: 800;
-            padding: 8px 16px;
-            border-radius: 12px;
-            text-transform: uppercase;
-        }
-
-        .evento-btn-wide {
-            display: inline-block;
-            padding: 14px 30px;
-            background: #1e293b;
-            color: white;
-            border-radius: 15px;
-            font-weight: 800;
-            font-size: 13px;
+            z-index: 10;
+            font-size: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
         }
 
-        .evento-btn-wide:hover {
-            background: #2563eb;
-            padding-right: 40px;
+        .slider-arrow:hover {
+            background: #1e293b;
+            color: white;
         }
 
-        /* COLORES DINÁMICOS POR FILA */
-        .evento-card-full:nth-child(4n+1) {
-            border-color: #2563eb;
+        .prev {
+            left: 30px;
         }
 
-        .evento-card-full:nth-child(4n+1) .evento-badge-large {
-            background: #dbeafe;
-            color: #2563eb;
+        .next {
+            right: 30px;
         }
 
-        .evento-card-full:nth-child(4n+2) {
-            border-color: #059669;
+        .evento-badge-float {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: #1e293b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 800;
         }
 
-        .evento-card-full:nth-child(4n+2) .evento-badge-large {
-            background: #d1fae5;
-            color: #059669;
+        .evento-title-grid {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #1e293b;
+            margin-bottom: 15px;
         }
 
-        .evento-card-full:nth-child(4n+3) {
-            border-color: #d97706;
+        .evento-text-grid {
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.7;
         }
 
-        .evento-card-full:nth-child(4n+3) .evento-badge-large {
-            background: #fef3c7;
-            color: #d97706;
+        .btn-fb-style {
+            background: #1877f2;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 13px;
         }
 
-        .evento-card-full:nth-child(4n+4) {
-            border-color: #7c3aed;
+        /* LIGHTBOX */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.98);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
-        .evento-card-full:nth-child(4n+4) .evento-badge-large {
-            background: #ede9fe;
-            color: #7c3aed;
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            animation: zoomImg 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+        /* COLORES */
+        .evento-card-horizontal:nth-child(4n+1) {
+            border-top: 10px solid #2563eb;
+        }
+
+        .evento-card-horizontal:nth-child(4n+2) {
+            border-top: 10px solid #059669;
+        }
+
+        .evento-card-horizontal:nth-child(4n+3) {
+            border-top: 10px solid #d97706;
+        }
+
+        .evento-card-horizontal:nth-child(4n+4) {
+            border-top: 10px solid #7c3aed;
         }
     </style>
 
+    <script>
+        function moveSlide(sliderId, direction) {
+            const container = document.getElementById(sliderId);
+            const slides = container.getElementsByClassName('slide');
+            let currentIndex = 0;
+            for (let i = 0; i < slides.length; i++) {
+                if (slides[i].classList.contains('active')) {
+                    currentIndex = i;
+                    slides[i].classList.remove('active');
+                    break;
+                }
+            }
+            let nextIndex = (currentIndex + direction + slides.length) % slides.length;
+            slides[nextIndex].classList.add('active');
+        }
+
+        function openModal(src) {
+            document.getElementById("imgFull").src = src;
+            document.getElementById("imageModal").style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    </script>
 @endsection
